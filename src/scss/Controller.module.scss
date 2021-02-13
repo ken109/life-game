@@ -1,0 +1,15 @@
+.wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%);
+
+  .controller {
+    position: relative;
+    display: flex;
+
+    *:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+}
