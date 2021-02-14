@@ -1,16 +1,25 @@
-import React, { useGlobal } from 'reactn';
+import React, { useGlobal, useState } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
 import style from "../scss/Controller.module.scss"
 import { logic } from "./LifeGame";
+
+const delays = [400, 200, 100, 50, 20]
 
 const Controller: React.FC = () => {
     const [active, setActive] = useGlobal("active")
     const [loop, setLoop] = useGlobal("loop")
 
+    const [delay, setDelay] = useState(2)
+
     const handleStop = async () => {
         await setActive(false)
         logic.init()
+    }
+
+    const handleChangeDelay = (change: number) => {
+        setDelay(delay + change)
+        logic.changeDelay(delays[delay + change])
     }
 
     const loopStyle: React.CSSProperties = {textDecoration: loop ? "line-through" : "none"}
@@ -30,6 +39,14 @@ const Controller: React.FC = () => {
                         </button>
                     )}
                 <button onClick={handleStop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
+
+                <button onClick={() => handleChangeDelay(1)} disabled={delay === delays.length - 1}>
+                    <FontAwesomeIcon className={style.icon} icon={faArrowUp}/>
+                </button>
+                <button onClick={() => handleChangeDelay(-1)} disabled={delay === 0}>
+                    <FontAwesomeIcon className={style.icon} icon={faArrowDown}/>
+                </button>
+
                 <button onClick={() => setLoop(!loop)}><span style={loopStyle}>Loop</span></button>
             </div>
         </div>

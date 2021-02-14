@@ -1,16 +1,13 @@
 import React, { useEffect, useGlobal } from "reactn";
-import style from "../scss/LifeGame.module.scss"
+import { State } from "reactn/default";
 import p5 from "p5";
+import style from "../scss/LifeGame.module.scss"
 import Logic from "./Logic";
 
-export interface Props {
-    active: boolean
-    loop: boolean
-}
-
-const state: Props = {
-    active: false,
-    loop: false,
+export const state: State = {
+    active: true,
+    loop: true,
+    delay: 100
 }
 
 export let logic: Logic
@@ -36,9 +33,11 @@ const sketch = (p: p5) => {
 const LifeGame: React.FC = () => {
     const [active] = useGlobal("active")
     const [loop] = useGlobal("loop")
+    const [delay] = useGlobal("delay")
 
     state.active = active
     state.loop = loop
+    state.delay = delay
 
     useEffect(() => {
         new p5(sketch)

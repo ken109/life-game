@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './component/App';
 import reportWebVitals from './reportWebVitals';
+import { state } from "./component/LifeGame";
 
 (async () => {
-    await setGlobal({
-        active: true,
-        loop: true
-    })
+    await setGlobal(state)
 })()
 
 ReactDOM.render(

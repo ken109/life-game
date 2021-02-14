@@ -4,5 +4,6 @@ declare module 'reactn/default' {
     export interface State {
         active: boolean
         loop: boolean
+        delay: number
     }
 }

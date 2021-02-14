@@ -1,26 +1,21 @@
 import p5 from "p5";
-import { Props } from "./LifeGame";
+import { State } from "reactn/default";
 
 class Logic {
     private p: p5
 
-    private state: Props
+    private state: State
 
     private cellSize: number = 20
     private cells: boolean[][] = []
 
-    constructor(p: p5, state: Props) {
+    private interval?: NodeJS.Timeout
+
+    constructor(p: p5, state: State) {
         this.p = p
-
         this.state = state
-
         this.init(true)
-
-        setInterval(() => {
-            if (this.state.active) {
-                this.next()
-            }
-        }, 100)
+        this.changeDelay(state.delay)
     }
 
     init(random?: boolean) {
@@ -36,11 +31,8 @@ class Logic {
     // event
     tick() {
         this.p.background(0)
-
         this.each((r: number, c: number) => {
-            if (this.cells[r][c]) {
-                this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
-            }
+            if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
         })
     }
 
@@ -50,21 +42,25 @@ class Logic {
         this.cells[r][c] = !this.cells[r][c]
     }
 
+    changeDelay(ms: number) {
+        if (this.interval) clearInterval(this.interval)
+        this.interval = setInterval(() => {
+            if (this.state.active) this.next()
+        }, ms)
+    }
+
     // logic
-    next() {
+    private next() {
         let next = this.cells.map(v => v.slice())
         this.each((r: number, c: number) => {
             const around = this.around(r, c)
-            if (around === 3) {
-                next[r][c] = true
-            } else if (around <= 1 || around >= 4) {
-                next[r][c] = false
-            }
+            if (around === 3) next[r][c] = true
+            else if (around <= 1 || around >= 4) next[r][c] = false
         })
         this.cells = next
     }
 
-    around(r: number, c: number): number {
+    private around(r: number, c: number): number {
         let count = 0
         for (let i of [-1, 0, 1]) {
             for (let j of [-1, 0, 1]) {
@@ -76,9 +72,7 @@ class Logic {
                         count += this.cells[_r][_c] ? 1 : 0
                     } else {
                         if (0 <= _r && _r < this.cells.length
-                            && 0 <= _c && _c < this.cells[0].length) {
-                            count += this.cells[_r][_c] ? 1 : 0
-                        }
+                            && 0 <= _c && _c < this.cells[0].length) count += this.cells[_r][_c] ? 1 : 0
                     }
                 }
             }
@@ -87,7 +81,7 @@ class Logic {
     }
 
     // util
-    each(fn: (r: number, c: number) => void) {
+    private each(fn: (r: number, c: number) => void) {
         for (let r = 0; r < this.cells.length; r++) {
             for (let c = 0; c < this.cells[0].length; c++) {
                 fn(r, c)
