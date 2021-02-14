@@ -1,6 +1,6 @@
 import React, { useGlobal, useState } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowUp, faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faPause, faPlay, faRandom, faStop } from "@fortawesome/free-solid-svg-icons";
 import style from "../scss/Controller.module.scss"
 import { logic } from "./LifeGame";
 
@@ -39,6 +39,10 @@ const Controller: React.FC = () => {
                         </button>
                     )}
                 <button onClick={handleStop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
+
+                <button onClick={() => logic.init(true)}>
+                    <FontAwesomeIcon className={style.icon} icon={faRandom}/>
+                </button>
 
                 <button onClick={() => handleChangeDelay(1)} disabled={delay === delays.length - 1}>
                     <FontAwesomeIcon className={style.icon} icon={faArrowUp}/>
