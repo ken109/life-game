@@ -8,7 +8,7 @@ const App = () => {
 
     return (
         <div className={style.app}>
-            <LifeGame active={active}/>
+            <LifeGame active={active} loop={true}/>
             <Controller
                 onStart={() => setActive(true)}
                 onStop={() => setActive(false)}

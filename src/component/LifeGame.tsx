@@ -5,10 +5,12 @@ import Logic from "./Logic";
 
 export interface Props {
     active: boolean
+    loop: boolean
 }
 
 const state: Props = {
-    active: false
+    active: false,
+    loop: false
 }
 
 const sketch = (p: p5) => {
@@ -29,6 +31,7 @@ const sketch = (p: p5) => {
 
 const LifeGame: React.FC<Props> = (props: Props) => {
     state.active = props.active
+    state.loop = props.loop
 
     useEffect(() => {
         new p5(sketch)
