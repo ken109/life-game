@@ -28,6 +28,10 @@ const sketch = (p: p5) => {
             logic.clicked()
         }
     }
+
+    p.mouseDragged = () => {
+        logic.dragged()
+    }
 }
 
 const LifeGame: React.FC = () => {

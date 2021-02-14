@@ -8,7 +8,11 @@ const Info = () => {
         <div className={style.wrapper}>
             <div className={`${style.info} ui`}>
                 <FontAwesomeIcon icon={faInfo}/>
-                <p>クリックすると生と死を切り替えれます</p>
+                <p>
+                    ・クリックすると生と死を切り替えれます<br/>
+                    <br/>
+                    ・ドラッグで生に変えられます
+                </p>
             </div>
         </div>
     );

@@ -42,6 +42,12 @@ class Logic {
         this.cells[r][c] = !this.cells[r][c]
     }
 
+    dragged() {
+        const r = Math.floor(this.p.mouseY / this.cellSize)
+        const c = Math.floor(this.p.mouseX / this.cellSize)
+        this.cells[r][c] = true
+    }
+
     changeDelay(ms: number) {
         if (this.interval) clearInterval(this.interval)
         this.interval = setInterval(() => {
