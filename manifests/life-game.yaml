@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: life-game
+  labels:
+    app: life-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: life-game
+  template:
+    metadata:
+      name: life-game
+      labels:
+        app: life-game
+    spec:
+      containers:
+        - name: life-game
+          image: asia.gcr.io/nimil-base/life-game:latest
+          imagePullPolicy: Always
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: life-game
+spec:
+  selector:
+    app: life-game
+  ports:
+    - port: 80
