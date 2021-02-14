@@ -1,0 +1,43 @@
+$icon_size: 30px;
+$delay: 0.5s;
+$info_height: 100px;
+
+.wrapper {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+
+  .info {
+    position: relative;
+    display: flex;
+    height: $icon_size;
+    width: $icon_size;
+    border-radius: $icon_size / 2;
+    transition: all $delay;
+
+    svg {
+      position: absolute;
+      right: $icon_size / 2;
+      top: $icon_size / 2;
+      transform: translate(50%, -50%);
+    }
+
+    p {
+      display: none;
+      height: $info_height - $icon_size;
+      margin-top: $icon_size;
+      transition: all $delay;
+      overflow: scroll;
+    }
+
+    &:hover {
+      height: $info_height;
+      width: 200px;
+      padding: 0 10px;
+
+      p {
+        display: inline;
+      }
+    }
+  }
+}

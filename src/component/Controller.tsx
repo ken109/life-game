@@ -26,7 +26,7 @@ const Controller: React.FC = () => {
 
     return (
         <div className={style.wrapper}>
-            <div className={style.controller}>
+            <div className={`${style.controller} ui`}>
                 {!active
                     ? (
                         <button onClick={() => setActive(!active)}>
