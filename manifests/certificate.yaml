@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: life-game-cert
+spec:
+  secretName: life-game-cert
+  dnsNames:
+    - life-game.nimil.dev
+  issuerRef:
+    name: nimil-issuer
+    kind: Issuer
