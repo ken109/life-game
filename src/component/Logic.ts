@@ -6,20 +6,43 @@ class Logic {
 
     private state: Props
 
+    private cellSize: number = 20
+    private cells: boolean[][] = []
+
     constructor(p: p5, state: Props) {
         this.p = p
 
         this.state = state
+
+        for (let r = 0; r * this.cellSize < p.windowHeight; r++) {
+            this.cells.push([])
+            for (let c = 0; c * this.cellSize < p.windowWidth; c++) {
+                this.cells[r].push(Math.random() < 0.5)
+            }
+        }
     }
 
     tick() {
-        if (this.state.active) {
-            if (this.p.mouseIsPressed) {
-                this.p.fill(0);
-            } else {
-                this.p.fill(255);
+        this.p.background(0)
+
+        this.each((r: number, c: number) => {
+            if (this.cells[r][c]) {
+                this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
             }
-            this.p.point(this.p.mouseX, this.p.mouseY)
+        })
+    }
+
+    clicked() {
+        const r = Math.floor(this.p.mouseY / this.cellSize)
+        const c = Math.floor(this.p.mouseX / this.cellSize)
+        this.cells[r][c] = !this.cells[r][c]
+    }
+
+    each(fn: (r: number, c: number) => void) {
+        for (let r = 0; r < this.cells.length; r++) {
+            for (let c = 0; c < this.cells[r].length; c++) {
+                fn(r, c)
+            }
         }
     }
 }

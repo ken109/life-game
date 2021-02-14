@@ -21,6 +21,10 @@ const sketch = (p: p5) => {
     p.draw = () => {
         logic.tick()
     }
+
+    p.mouseClicked = () => {
+        logic.clicked()
+    }
 }
 
 const LifeGame: React.FC<Props> = (props: Props) => {
