@@ -24,8 +24,10 @@ const sketch = (p: p5) => {
         logic.tick()
     }
 
-    p.mouseClicked = () => {
-        logic.clicked()
+    p.mouseClicked = (e: MouseEvent) => {
+        if ((e.target as HTMLElement).tagName === 'CANVAS') {
+            logic.clicked()
+        }
     }
 }
 
