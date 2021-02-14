@@ -33,9 +33,7 @@ const Controller: React.FC = () => {
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown)
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-        }
+        return () => window.removeEventListener('keydown', handleKeyDown)
     }, [handleKeyDown])
 
     const loopStyle: React.CSSProperties = {textDecoration: loop ? "line-through" : "none"}
