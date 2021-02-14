@@ -1,4 +1,4 @@
-import React, { useGlobal, useState } from 'reactn';
+import React, { useCallback, useEffect, useGlobal, useState } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp, faPause, faPlay, faRandom, faStop } from "@fortawesome/free-solid-svg-icons";
 import style from "../scss/Controller.module.scss"
@@ -17,10 +17,26 @@ const Controller: React.FC = () => {
         logic.init()
     }
 
-    const handleChangeDelay = (change: number) => {
-        setDelay(delay + change)
-        logic.changeDelay(delays[delay + change])
-    }
+    const handleChangeDelay = useCallback((change: number) => {
+        if (0 <= delay + change && delay + change <= delays.length - 1) {
+            setDelay(delay + change)
+            logic.changeDelay(delays[delay + change])
+        }
+    }, [delay])
+
+    const handleKeyDown = useCallback(({key}) => {
+        if (key === ' ') setActive(!active).then()
+        if (key === 'ArrowUp') handleChangeDelay(1)
+        if (key === 'ArrowDown') handleChangeDelay(-1)
+        if (key === 'l') setLoop(!loop).then()
+    }, [active, handleChangeDelay, loop, setActive, setLoop])
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [handleKeyDown])
 
     const loopStyle: React.CSSProperties = {textDecoration: loop ? "line-through" : "none"}
 
@@ -29,12 +45,12 @@ const Controller: React.FC = () => {
             <div className={`${style.controller} ui`}>
                 {!active
                     ? (
-                        <button onClick={() => setActive(!active)}>
+                        <button onClick={() => setActive(true)}>
                             <FontAwesomeIcon className={style.icon} icon={faPlay}/>
                         </button>
                     )
                     : (
-                        <button onClick={() => setActive(!active)}>
+                        <button onClick={() => setActive(false)}>
                             <FontAwesomeIcon className={style.icon} icon={faPause}/>
                         </button>
                     )}
@@ -44,10 +60,10 @@ const Controller: React.FC = () => {
                     <FontAwesomeIcon className={style.icon} icon={faRandom}/>
                 </button>
 
-                <button onClick={() => handleChangeDelay(1)} disabled={delay === delays.length - 1}>
+                <button onClick={() => handleChangeDelay(1)} disabled={delay >= delays.length - 1}>
                     <FontAwesomeIcon className={style.icon} icon={faArrowUp}/>
                 </button>
-                <button onClick={() => handleChangeDelay(-1)} disabled={delay === 0}>
+                <button onClick={() => handleChangeDelay(-1)} disabled={delay <= 0}>
                     <FontAwesomeIcon className={style.icon} icon={faArrowDown}/>
                 </button>
 
