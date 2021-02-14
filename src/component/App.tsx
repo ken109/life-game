@@ -4,14 +4,17 @@ import LifeGame from "./LifeGame";
 import Controller from "./Controller";
 
 const App = () => {
-    const [active, setActive] = useState<boolean>(false)
+    const [active, setActive] = useState<boolean>(true)
+    const [loop, setLoop] = useState<boolean>(true)
 
     return (
         <div className={style.app}>
-            <LifeGame active={active} loop={true}/>
+            <LifeGame active={active} loop={loop}/>
             <Controller
-                onStart={() => setActive(true)}
-                onStop={() => setActive(false)}
+                active={active}
+                loop={loop}
+                toggleActive={() => setActive(!active)}
+                toggleLoop={() => setLoop(!loop)}
             />
         </div>
     );

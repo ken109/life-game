@@ -22,7 +22,9 @@ class Logic {
         }
 
         setInterval(() => {
-            this.next()
+            if (this.state.active) {
+                this.next()
+            }
         }, 100)
     }
 

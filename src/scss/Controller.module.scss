@@ -7,9 +7,22 @@
   .controller {
     position: relative;
     display: flex;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(200, 200, 200, 0.8);
 
-    *:not(:first-child) {
-      margin-left: 10px;
+    button {
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+
+      .icon {
+        font-size: 18px;
+      }
+
+      span {
+        font-size: 18px;
+      }
     }
   }
 }
