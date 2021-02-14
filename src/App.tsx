@@ -1,8 +1,8 @@
 import React from 'reactn';
-import style from '../scss/App.module.scss';
-import LifeGame from "./LifeGame";
-import Controller from "./Controller";
-import Info from "./Info";
+import style from './App.module.scss';
+import LifeGame from "./component/LifeGame";
+import Controller from "./component/Controller";
+import Info from "./component/Info";
 
 const App = () => {
     return (

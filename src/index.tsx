@@ -1,7 +1,7 @@
 import React, { setGlobal } from 'reactn';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './component/App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { state } from "./component/LifeGame";
 
