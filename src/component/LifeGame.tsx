@@ -1,32 +1,30 @@
 import React, { useEffect } from "react";
 import style from "../scss/LifeGame.module.scss"
 import p5 from "p5";
+import Logic from "./Logic";
 
-interface Props {
+export interface Props {
     active: boolean
 }
 
-let active = false
+const state: Props = {
+    active: false
+}
 
 const sketch = (p: p5) => {
+    const logic = new Logic(p, state)
+
     p.setup = () => {
         p.createCanvas(p.windowWidth, p.windowHeight).parent('life-game')
     }
 
     p.draw = () => {
-        if (active) {
-            if (p.mouseIsPressed) {
-                p.fill(0);
-            } else {
-                p.fill(255);
-            }
-            p.point(p.mouseX, p.mouseY)
-        }
+        logic.tick()
     }
 }
 
 const LifeGame: React.FC<Props> = (props: Props) => {
-    active = props.active
+    state.active = props.active
 
     useEffect(() => {
         new p5(sketch)
