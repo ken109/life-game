@@ -1,7 +1,7 @@
 import React, { useEffect, useGlobal } from "reactn";
 import { State } from "reactn/default";
 import p5 from "p5";
-import style from "../scss/LifeGame.module.scss"
+import style from "../style/LifeGame.module.scss"
 import Logic from "./Logic";
 
 export const state: State = {

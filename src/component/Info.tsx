@@ -1,7 +1,7 @@
 import React from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
-import style from '../scss/Info.module.scss';
+import style from '../style/Info.module.scss';
 
 const Info = () => {
     return (

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useGlobal, useState } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp, faPause, faPlay, faRandom, faStop } from "@fortawesome/free-solid-svg-icons";
-import style from "../scss/Controller.module.scss"
+import style from "../style/Controller.module.scss"
 import { logic } from "./LifeGame";
 
 const delays = [400, 200, 100, 50, 20]
