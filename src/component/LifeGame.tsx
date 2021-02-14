@@ -24,13 +24,11 @@ const sketch = (p: p5) => {
     }
 
     p.mouseClicked = (e: MouseEvent) => {
-        if ((e.target as HTMLElement).tagName === 'CANVAS') {
-            logic.clicked()
-        }
+        if ((e.target as HTMLElement).tagName === 'CANVAS') logic.clicked()
     }
 
-    p.mouseDragged = () => {
-        logic.dragged()
+    p.mouseDragged = (e: MouseEvent) => {
+        if ((e.target as HTMLElement).tagName === 'CANVAS') logic.dragged()
     }
 }
 
