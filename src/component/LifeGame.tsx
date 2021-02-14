@@ -6,15 +6,19 @@ import Logic from "./Logic";
 export interface Props {
     active: boolean
     loop: boolean
+    stop: number
 }
 
 const state: Props = {
     active: false,
-    loop: false
+    loop: false,
+    stop: 0
 }
 
+let logic: Logic
+
 const sketch = (p: p5) => {
-    const logic = new Logic(p, state)
+    logic = new Logic(p, state)
 
     p.setup = () => {
         p.createCanvas(p.windowWidth, p.windowHeight).parent('life-game')
@@ -38,6 +42,12 @@ const LifeGame: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         new p5(sketch)
     }, [])
+
+    useEffect(() => {
+        if (props.stop > 0) {
+            logic.init()
+        }
+    }, [props.stop])
 
     return (
         <div id="life-game" className={style.wrapper}/>

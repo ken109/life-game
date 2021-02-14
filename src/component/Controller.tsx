@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
 import style from "../scss/Controller.module.scss"
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
     loop: boolean
     toggleActive: any
     toggleLoop: any
+    stop: any
 }
 
 const Controller: React.FC<Props> = (props: Props) => {
@@ -27,6 +28,7 @@ const Controller: React.FC<Props> = (props: Props) => {
                             <FontAwesomeIcon className={style.icon} icon={faPause}/>
                         </button>
                     )}
+                <button onClick={props.stop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
                 <button onClick={props.toggleLoop}><span style={loopStyle}>Loop</span></button>
             </div>
         </div>

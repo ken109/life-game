@@ -7,14 +7,22 @@ const App = () => {
     const [active, setActive] = useState<boolean>(true)
     const [loop, setLoop] = useState<boolean>(true)
 
+    const [stop, setStop] = useState<number>(0)
+
+    const handleStop = () => {
+        setStop(stop + 1)
+        setActive(false)
+    }
+
     return (
         <div className={style.app}>
-            <LifeGame active={active} loop={loop}/>
+            <LifeGame active={active} loop={loop} stop={stop}/>
             <Controller
                 active={active}
                 loop={loop}
                 toggleActive={() => setActive(!active)}
                 toggleLoop={() => setLoop(!loop)}
+                stop={handleStop}
             />
         </div>
     );

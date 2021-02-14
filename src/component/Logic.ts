@@ -14,18 +14,23 @@ class Logic {
 
         this.state = state
 
-        for (let r = 0; r * this.cellSize < p.windowHeight; r++) {
-            this.cells.push([])
-            for (let c = 0; c * this.cellSize < p.windowWidth; c++) {
-                this.cells[r].push(Math.random() < 0.5)
-            }
-        }
+        this.init(true)
 
         setInterval(() => {
             if (this.state.active) {
                 this.next()
             }
         }, 100)
+    }
+
+    init(random?: boolean) {
+        this.cells = []
+        for (let r = 0; r * this.cellSize < this.p.windowHeight; r++) {
+            this.cells.push([])
+            for (let c = 0; c * this.cellSize < this.p.windowWidth; c++) {
+                this.cells[r].push(random ? Math.random() < 0.5 : false)
+            }
+        }
     }
 
     // event
