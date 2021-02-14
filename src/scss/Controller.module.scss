@@ -4,6 +4,10 @@
   bottom: 10%;
   transform: translate(-50%);
 
+  @media screen and (max-width: 800px) {
+    bottom: 20%;
+  }
+
   .controller {
     position: relative;
     display: flex;
