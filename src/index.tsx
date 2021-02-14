@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { setGlobal } from 'reactn';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './component/App';
 import reportWebVitals from './reportWebVitals';
 
+(async () => {
+    await setGlobal({
+        active: true,
+        loop: true
+    })
+})()
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <App/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

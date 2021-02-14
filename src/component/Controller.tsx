@@ -1,35 +1,36 @@
-import React from 'react';
+import React, { useGlobal } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
 import style from "../scss/Controller.module.scss"
+import { logic } from "./LifeGame";
 
-interface Props {
-    active: boolean
-    loop: boolean
-    toggleActive: any
-    toggleLoop: any
-    stop: any
-}
+const Controller: React.FC = () => {
+    const [active, setActive] = useGlobal("active")
+    const [loop, setLoop] = useGlobal("loop")
 
-const Controller: React.FC<Props> = (props: Props) => {
-    const loopStyle: React.CSSProperties = {textDecoration: props.loop ? "line-through" : "none"}
+    const handleStop = async () => {
+        await setActive(false)
+        logic.init()
+    }
+
+    const loopStyle: React.CSSProperties = {textDecoration: loop ? "line-through" : "none"}
 
     return (
         <div className={style.wrapper}>
             <div className={style.controller}>
-                {!props.active
+                {!active
                     ? (
-                        <button onClick={props.toggleActive}>
+                        <button onClick={() => setActive(!active)}>
                             <FontAwesomeIcon className={style.icon} icon={faPlay}/>
                         </button>
                     )
                     : (
-                        <button onClick={props.toggleActive}>
+                        <button onClick={() => setActive(!active)}>
                             <FontAwesomeIcon className={style.icon} icon={faPause}/>
                         </button>
                     )}
-                <button onClick={props.stop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
-                <button onClick={props.toggleLoop}><span style={loopStyle}>Loop</span></button>
+                <button onClick={handleStop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
+                <button onClick={() => setLoop(!loop)}><span style={loopStyle}>Loop</span></button>
             </div>
         </div>
     );

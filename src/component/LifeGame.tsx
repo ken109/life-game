@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useGlobal } from "reactn";
 import style from "../scss/LifeGame.module.scss"
 import p5 from "p5";
 import Logic from "./Logic";
@@ -6,16 +6,14 @@ import Logic from "./Logic";
 export interface Props {
     active: boolean
     loop: boolean
-    stop: number
 }
 
 const state: Props = {
     active: false,
     loop: false,
-    stop: 0
 }
 
-let logic: Logic
+export let logic: Logic
 
 const sketch = (p: p5) => {
     logic = new Logic(p, state)
@@ -35,19 +33,16 @@ const sketch = (p: p5) => {
     }
 }
 
-const LifeGame: React.FC<Props> = (props: Props) => {
-    state.active = props.active
-    state.loop = props.loop
+const LifeGame: React.FC = () => {
+    const [active] = useGlobal("active")
+    const [loop] = useGlobal("loop")
+
+    state.active = active
+    state.loop = loop
 
     useEffect(() => {
         new p5(sketch)
     }, [])
-
-    useEffect(() => {
-        if (props.stop > 0) {
-            logic.init()
-        }
-    }, [props.stop])
 
     return (
         <div id="life-game" className={style.wrapper}/>
