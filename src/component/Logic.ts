@@ -31,20 +31,20 @@ class Logic {
     // event
     tick() {
         this.p.background(10)
+        this.p.fill(255)
         this.each((r: number, c: number) => {
             if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
         })
+        if (this.state.isSetting) this.preview()
     }
 
     clicked() {
-        const r = Math.floor(this.p.mouseY / this.cellSize)
-        const c = Math.floor(this.p.mouseX / this.cellSize)
+        const [r, c] = this.getCell()
         this.cells[r][c] = !this.cells[r][c]
     }
 
     dragged() {
-        const r = Math.floor(this.p.mouseY / this.cellSize)
-        const c = Math.floor(this.p.mouseX / this.cellSize)
+        const [r, c] = this.getCell()
         this.cells[r][c] = true
     }
 
@@ -86,7 +86,28 @@ class Logic {
         return count
     }
 
+    private preview() {
+        if (this.state.settingPattern) {
+            const [r, c] = this.getCell()
+            const mr = Math.floor(this.state.settingPattern.body.length / 2)
+            const mc = Math.floor(this.state.settingPattern.body[0].length / 2)
+            this.p.fill(255, 0, 0)
+            for (let pr = 0; pr < this.state.settingPattern.body.length; pr++) {
+                for (let pc = 0; pc < this.state.settingPattern.body[0].length; pc++) {
+                    if (this.state.settingPattern.body[pr][pc])
+                        this.p.square((c + pc - mc) * this.cellSize + 1, (r + pr - mr) * this.cellSize + 1, this.cellSize - 2)
+                }
+            }
+        }
+    }
+
     // util
+    private getCell(): [number, number] {
+        const r = Math.floor(this.p.mouseY / this.cellSize)
+        const c = Math.floor(this.p.mouseX / this.cellSize)
+        return [r, c]
+    }
+
     private each(fn: (r: number, c: number) => void) {
         for (let r = 0; r < this.cells.length; r++) {
             for (let c = 0; c < this.cells[0].length; c++) {

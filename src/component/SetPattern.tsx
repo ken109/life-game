@@ -1,12 +1,16 @@
-import React from 'reactn';
+import React, { useGlobal } from 'reactn';
 import style from '../style/SetPattern.module.scss'
 import PatternGroups from "../pattern";
 
 const SetPattern: React.FC = () => {
+    const [isSetting, setIsSetting] = useGlobal('isSetting')
+    const setSettingPattern = useGlobal('settingPattern')[1]
+
     return (
         <div className={style.wrapper}>
             <div className={`${style.body} ui`}>
-                <input type="checkbox" id="menu-btn-check" className={style.menuBtnCheck}/>
+                <input onChange={() => setIsSetting(!isSetting)} type="checkbox" id="menu-btn-check"
+                       className={style.menuBtnCheck}/>
                 <label className={style.menuBtn} htmlFor="menu-btn-check">
                     <span/>
                 </label>
@@ -17,8 +21,9 @@ const SetPattern: React.FC = () => {
                             <div>
                                 {patternGroup.patterns.map((pattern, index) => (
                                     <div key={pattern.name} className={style.pattern}>
-                                        <input type="radio" id={`pattern-${index}`} name="pattern"/>
-                                        <label htmlFor={`pattern-${index}`} >{pattern.name}</label>
+                                        <input onChange={() => setSettingPattern(pattern)} type="radio"
+                                               id={`pattern-${index}`} name="pattern"/>
+                                        <label htmlFor={`pattern-${index}`}>{pattern.name}</label>
                                     </div>
                                 ))}
                             </div>

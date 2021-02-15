@@ -6,7 +6,9 @@ import Logic from "./Logic";
 export const state: State = {
     active: true,
     loop: true,
-    delay: 100
+    delay: 100,
+    isSetting: false,
+    settingPattern: undefined
 }
 
 export let logic: Logic
@@ -35,10 +37,14 @@ const LifeGame: React.FC = () => {
     const [active] = useGlobal("active")
     const [loop] = useGlobal("loop")
     const [delay] = useGlobal("delay")
+    const [isSetting] = useGlobal("isSetting")
+    const [settingPattern] = useGlobal("settingPattern")
 
     state.active = active
     state.loop = loop
     state.delay = delay
+    state.isSetting = isSetting
+    state.settingPattern = settingPattern
 
     useEffect(() => {
         new p5(sketch)
