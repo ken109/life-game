@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useGlobal } from 'reactn';
 import style from '../style/SetPattern.module.scss'
 import PatternGroups from "../pattern";
+import { logic } from "./LifeGame";
 
 const SetPattern: React.FC = () => {
     const [isSetting, setIsSetting] = useGlobal('isSetting')
@@ -19,6 +20,10 @@ const SetPattern: React.FC = () => {
         window.addEventListener('keydown', handleKeyDown)
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [handleKeyDown])
+
+    useEffect(() => {
+        logic.finishSetting = handleEscape
+    }, [handleEscape])
 
     return (
         <div className={style.wrapper}>
