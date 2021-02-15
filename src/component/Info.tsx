@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import style from '../style/Info.module.scss';
 
-const Info = () => {
+const Info: React.FC = () => {
     return (
         <div className={style.wrapper}>
             <div className={`${style.info} ui`}>
