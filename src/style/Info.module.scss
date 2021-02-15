@@ -1,5 +1,5 @@
 $icon_size: 30px;
-$delay: 0.5s;
+$duration: 0.5s;
 $info_height: 150px;
 
 .wrapper {
@@ -13,7 +13,7 @@ $info_height: 150px;
     height: $icon_size;
     width: $icon_size;
     border-radius: $icon_size / 2;
-    transition: all $delay;
+    transition: all $duration;
 
     svg {
       position: absolute;
@@ -26,14 +26,14 @@ $info_height: 150px;
       display: none;
       height: $info_height - $icon_size;
       margin-top: $icon_size;
-      transition: all $delay;
+      transition: all $duration;
       overflow: scroll;
     }
 
     &:hover {
       height: $info_height;
       width: 200px;
-      padding: 0 10px;
+      padding: 0 10px 10px;
 
       p {
         display: inline;
