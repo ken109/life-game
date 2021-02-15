@@ -1,5 +1,6 @@
-$icon_size: 30px;
-$duration: 0.5s;
+@import "variables";
+
+$info_icon_size: 30px;
 $info_height: 150px;
 
 .wrapper {
@@ -10,24 +11,24 @@ $info_height: 150px;
   .info {
     position: relative;
     display: flex;
-    height: $icon_size;
-    width: $icon_size;
-    border-radius: $icon_size / 2;
+    height: $info_icon_size;
+    width: $info_icon_size;
+    border-radius: $info_icon_size / 2;
     transition: all $duration;
+    overflow: scroll;
 
     svg {
       position: absolute;
-      right: $icon_size / 2;
-      top: $icon_size / 2;
+      right: $info_icon_size / 2;
+      top: $info_icon_size / 2;
       transform: translate(50%, -50%);
     }
 
     p {
-      display: none;
-      height: $info_height - $icon_size;
-      margin-top: $icon_size;
+      height: $info_height - $info_icon_size;
+      margin-top: $info_icon_size;
+      opacity: 0;
       transition: all $duration;
-      overflow: scroll;
     }
 
     &:hover {
@@ -36,7 +37,7 @@ $info_height: 150px;
       padding: 0 10px 10px;
 
       p {
-        display: inline;
+        opacity: 1;
       }
     }
   }

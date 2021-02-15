@@ -30,7 +30,7 @@ class Logic {
 
     // event
     tick() {
-        this.p.background(0)
+        this.p.background(10)
         this.each((r: number, c: number) => {
             if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
         })
