@@ -1,7 +1,6 @@
 import React, { useEffect, useGlobal } from "reactn";
 import { State } from "reactn/default";
 import p5 from "p5";
-import style from "../style/LifeGame.module.scss"
 import Logic from "./Logic";
 
 export const state: State = {
@@ -46,7 +45,7 @@ const LifeGame: React.FC = () => {
     }, [])
 
     return (
-        <div id="life-game" className={style.wrapper}/>
+        <div id="life-game"/>
     );
 };
 
