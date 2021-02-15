@@ -1,16 +1,30 @@
-import React, { useGlobal } from 'reactn';
+import React, { useCallback, useEffect, useGlobal } from 'reactn';
 import style from '../style/SetPattern.module.scss'
 import PatternGroups from "../pattern";
 
 const SetPattern: React.FC = () => {
     const [isSetting, setIsSetting] = useGlobal('isSetting')
-    const setSettingPattern = useGlobal('settingPattern')[1]
+    const [settingPattern, setSettingPattern] = useGlobal('settingPattern')
+
+    const handleEscape = useCallback(() => {
+        setIsSetting(false).then()
+        setSettingPattern(undefined).then()
+    }, [setIsSetting, setSettingPattern])
+
+    const handleKeyDown = useCallback(({key}) => {
+        if (key === 'Escape') handleEscape()
+    }, [handleEscape])
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [handleKeyDown])
 
     return (
         <div className={style.wrapper}>
             <div className={`${style.body} ui`}>
                 <input onChange={() => setIsSetting(!isSetting)} type="checkbox" id="menu-btn-check"
-                       className={style.menuBtnCheck}/>
+                       className={style.menuBtnCheck} checked={isSetting}/>
                 <label className={style.menuBtn} htmlFor="menu-btn-check">
                     <span/>
                 </label>
@@ -22,7 +36,8 @@ const SetPattern: React.FC = () => {
                                 {patternGroup.patterns.map((pattern, index) => (
                                     <div key={pattern.name} className={style.pattern}>
                                         <input onChange={() => setSettingPattern(pattern)} type="radio"
-                                               id={`pattern-${index}`} name="pattern"/>
+                                               id={`pattern-${index}`} name="pattern"
+                                               checked={settingPattern === pattern}/>
                                         <label htmlFor={`pattern-${index}`}>{pattern.name}</label>
                                     </div>
                                 ))}
