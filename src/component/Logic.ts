@@ -56,7 +56,7 @@ class Logic {
     }
 
     // logic
-    private next() {
+    next() {
         let next = this.cells.map(v => v.slice())
         this.each((r: number, c: number) => {
             const around = this.around(r, c)

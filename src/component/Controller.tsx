@@ -1,6 +1,14 @@
 import React, { useCallback, useEffect, useGlobal, useState } from 'reactn';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowUp, faPause, faPlay, faRandom, faStop } from "@fortawesome/free-solid-svg-icons";
+import {
+    faArrowDown,
+    faArrowUp,
+    faPause,
+    faPlay,
+    faRandom,
+    faStepForward,
+    faStop
+} from "@fortawesome/free-solid-svg-icons";
 import style from "../style/Controller.module.scss"
 import { logic } from "./LifeGame";
 
@@ -26,6 +34,7 @@ const Controller: React.FC = () => {
 
     const handleKeyDown = useCallback(({key}) => {
         if (key === ' ') setActive(!active).then()
+        if (key === 'ArrowRight') logic.next()
         if (key === 'ArrowUp') handleChangeDelay(1)
         if (key === 'ArrowDown') handleChangeDelay(-1)
         if (key === 'l') setLoop(!loop).then()
@@ -53,6 +62,10 @@ const Controller: React.FC = () => {
                         </button>
                     )}
                 <button onClick={handleStop}><FontAwesomeIcon className={style.icon} icon={faStop}/></button>
+
+                <button onClick={() => logic.next()}>
+                    <FontAwesomeIcon className={style.icon} icon={faStepForward}/>
+                </button>
 
                 <button onClick={() => logic.init(true)}>
                     <FontAwesomeIcon className={style.icon} icon={faRandom}/>
