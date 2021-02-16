@@ -1,7 +1,6 @@
 import React from 'reactn';
 import style from './App.module.scss';
-import { Controller, Info, LifeGame } from "./component";
-import SetPattern from "./component/SetPattern";
+import { Controller, Info, LifeGame, SetPattern } from "./component";
 
 const App: React.FC = () => {
     return (
