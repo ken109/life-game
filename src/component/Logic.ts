@@ -34,9 +34,7 @@ class Logic {
     tick() {
         this.p.background(10)
         this.p.fill(255)
-        this.each((r: number, c: number) => {
-            if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
-        })
+        this.draw()
         if (this.state.isSetting) this.preview()
     }
 
@@ -80,7 +78,7 @@ class Logic {
         for (let i of [-1, 0, 1]) {
             for (let j of [-1, 0, 1]) {
                 if (!(i === 0 && j === 0)) {
-                    let _r: number = r + i, _c: number = c + j
+                    let _r = r + i, _c = c + j
                     if (this.state.loop) {
                         _r = _r === -1 ? this.cells.length - 1 : _r === this.cells.length ? 0 : _r
                         _c = _c === -1 ? this.cells[0].length - 1 : _c === this.cells[0].length ? 0 : _c
@@ -93,6 +91,12 @@ class Logic {
             }
         }
         return count
+    }
+
+    private draw() {
+        this.each((r: number, c: number) => {
+            if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
+        })
     }
 
     private preview() {
