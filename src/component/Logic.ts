@@ -24,9 +24,8 @@ class Logic {
         this.cells = []
         for (let r = 0; r * this.cellSize < this.p.windowHeight; r++) {
             this.cells.push([])
-            for (let c = 0; c * this.cellSize < this.p.windowWidth; c++) {
+            for (let c = 0; c * this.cellSize < this.p.windowWidth; c++)
                 this.cells[r].push(random ? Math.random() < 0.5 : false)
-            }
         }
     }
 
@@ -84,8 +83,8 @@ class Logic {
                         _c = _c === -1 ? this.cells[0].length - 1 : _c === this.cells[0].length ? 0 : _c
                         count += this.cells[_r][_c] ? 1 : 0
                     } else {
-                        if (0 <= _r && _r < this.cells.length
-                            && 0 <= _c && _c < this.cells[0].length) count += this.cells[_r][_c] ? 1 : 0
+                        if (0 <= _r && _r < this.cells.length && 0 <= _c && _c < this.cells[0].length)
+                            count += this.cells[_r][_c] ? 1 : 0
                     }
                 }
             }
@@ -95,7 +94,8 @@ class Logic {
 
     private draw() {
         this.each((r: number, c: number) => {
-            if (this.cells[r][c]) this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
+            if (this.cells[r][c])
+                this.p.square(c * this.cellSize + 1, r * this.cellSize + 1, this.cellSize - 2)
         })
     }
 
@@ -114,9 +114,8 @@ class Logic {
 
     private each(fn: (r: number, c: number) => void) {
         for (let r = 0; r < this.cells.length; r++) {
-            for (let c = 0; c < this.cells[0].length; c++) {
+            for (let c = 0; c < this.cells[0].length; c++)
                 fn(r, c)
-            }
         }
     }
 
@@ -127,11 +126,8 @@ class Logic {
             const mc = Math.floor(this.state.settingPattern.body[0].length / 2)
             this.p.fill(255, 0, 0)
             for (let pr = 0; pr < this.state.settingPattern.body.length; pr++) {
-                for (let pc = 0; pc < this.state.settingPattern.body[0].length; pc++) {
-                    const _r = r + pr - mr, _c = c + pc - mc
-                    if (this.state.settingPattern.body[pr][pc])
-                        fn(_r, _c)
-                }
+                for (let pc = 0; pc < this.state.settingPattern.body[0].length; pc++)
+                    if (this.state.settingPattern.body[pr][pc]) fn(r + pr - mr, c + pc - mc)
             }
         }
     }
