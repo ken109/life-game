@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables";
 
 $info_icon_size: 30px;
 $info_height: 150px;
@@ -14,7 +14,7 @@ $info_height: 150px;
     height: $info_icon_size;
     width: $info_icon_size;
     border-radius: $info_icon_size / 2;
-    transition: all $duration;
+    transition: all variables.$duration;
     overflow: scroll;
 
     svg {
@@ -28,7 +28,7 @@ $info_height: 150px;
       height: $info_height - $info_icon_size;
       margin-top: $info_icon_size;
       opacity: 0;
-      transition: all $duration;
+      transition: all variables.$duration;
     }
 
     &:hover {
