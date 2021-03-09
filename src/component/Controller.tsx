@@ -10,6 +10,7 @@ import {
     faStop
 } from "@fortawesome/free-solid-svg-icons";
 import style from "../style/Controller.module.scss"
+import globalStyle from "../style/global.module.scss"
 import { logic } from "./LifeGame";
 
 const delays = [400, 200, 100, 50, 20]
@@ -49,7 +50,7 @@ const Controller: React.FC = () => {
 
     return (
         <div className={style.wrapper}>
-            <div className={`${style.controller} ui`}>
+            <div className={`${globalStyle.ui} ${style.controller}`}>
                 {!active
                     ? (
                         <button onClick={() => setActive(true)}>

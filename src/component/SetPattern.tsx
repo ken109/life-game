@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useGlobal } from 'reactn';
 import style from '../style/SetPattern.module.scss'
+import globalStyle from "../style/global.module.scss"
 import PatternGroups from "../pattern";
 import { logic } from "./LifeGame";
 
@@ -27,7 +28,7 @@ const SetPattern: React.FC = () => {
 
     return (
         <div className={style.wrapper}>
-            <div className={`${style.body} ui`}>
+            <div className={`${globalStyle.ui} ${style.body}`}>
                 <input onChange={() => setIsSetting(!isSetting)} type="checkbox" id="menu-btn-check"
                        className={style.menuBtnCheck} checked={isSetting}/>
                 <label className={style.menuBtn} htmlFor="menu-btn-check">

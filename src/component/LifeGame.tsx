@@ -16,13 +16,9 @@ export let logic: Logic
 const sketch = (p: p5) => {
     logic = new Logic(p, state)
 
-    p.setup = () => {
-        p.createCanvas(p.windowWidth, p.windowHeight).parent('life-game')
-    }
+    p.setup = () => p.createCanvas(p.windowWidth, p.windowHeight).parent('life-game')
 
-    p.draw = () => {
-        logic.tick()
-    }
+    p.draw = () => logic.tick()
 
     p.mouseClicked = (e: MouseEvent) => {
         if ((e.target as HTMLElement).tagName === 'CANVAS') logic.clicked()

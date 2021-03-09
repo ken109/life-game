@@ -38,7 +38,7 @@ class Logic {
     }
 
     clicked() {
-        if (this.state.isSetting && this.finishSetting) {
+        if (this.state.isSetting && this.finishSetting !== undefined) {
             this.eachPreview((r: number, c: number) => {
                 this.cells[r][c] = true
             })
