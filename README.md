@@ -2,7 +2,7 @@
 
 ## 概要
 
-![ライフゲーム](https://storage.googleapis.com/nimil/life-game.png)
+![ライフゲーム](https://ken109-public.s3-ap-northeast-1.amazonaws.com/life-game.gif)
 
 React+Typescript × p5.jsで実装したライフゲームです。
 
