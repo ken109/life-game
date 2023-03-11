@@ -6,7 +6,7 @@
 
 React+Typescript × p5.jsで実装したライフゲームです。
 
-[ここ](https://life-game.nimil.dev/)で実際にさわれます。
+[ここ](https://ken109.github.io/life-game/)で実際にさわれます。
 
 ## ライフゲームとは
 
